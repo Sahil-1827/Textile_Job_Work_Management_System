@@ -26,3 +26,6 @@ export const getDashboardStats = () => API.get("/dashboard/stats");
 export const getJobWorkTypes = () => API.get("/job-work/types");
 export const addJobWorkType = (data) => API.post("/job-work/types", data);
 export const updateJobWorkType = (id, data) => API.put(`/job-work/types/${id}`, data);
+export const getJobWorkEntries = () => API.get("/job-work/entries");
+export const addJobWorkEntry = (data) => API.post("/job-work/entries", data);
+export const updateEntryStatus = (id, status) => API.patch(`/job-work/entries/${id}/status`, { status });

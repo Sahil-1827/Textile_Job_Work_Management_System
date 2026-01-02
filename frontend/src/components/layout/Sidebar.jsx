@@ -16,6 +16,7 @@ const Sidebar = () => {
     { text: 'Traders', icon: <People />, path: '/traders' },
     { text: 'Job Rates', icon: <Receipt />, path: '/job-rates' },
     { text: 'Invoices', icon: <Receipt />, path: '/invoices' },
+    { text: 'Job Work Entry', icon: <Receipt />, path: '/job-work-entry' },
   ];
 
   const handleLogout = () => {

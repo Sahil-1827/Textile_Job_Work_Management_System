@@ -11,6 +11,7 @@ import Sidebar from './components/layout/Sidebar';
 import API from './services/api';
 import JobWorkConfig from './pages/JobWorkConfig';
 import 'react-toastify/dist/ReactToastify.css';
+import JobWorkEntry from './pages/JobWorkEntry';
 
 function AuthHandler({ setIsAuthenticated }) {
   const navigate = useNavigate();
@@ -81,6 +82,7 @@ function App() {
                   <Routes>
                     <Route path="/dashboard" element={<DashboardHome />} />
                     <Route path="/job-rates" element={<JobWorkConfig />} />
+                    <Route path="/job-work-entry" element={<JobWorkEntry />} />
                     <Route path="*" element={<Navigate to="/dashboard" />} />
                   </Routes>
                 </Box>
