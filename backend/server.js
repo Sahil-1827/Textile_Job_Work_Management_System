@@ -20,6 +20,7 @@ mongoose.connect(process.env.MONGO_URI)
 // Routes
 app.use('/api/auth', authRoutes);
 app.use('/api/dashboard', require('./routes/dashboard'));
+app.use('/api/job-work', require('./routes/jobWork'));
 
 // Basic Route
 app.get('/', (req, res) => {

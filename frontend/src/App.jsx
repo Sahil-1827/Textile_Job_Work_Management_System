@@ -8,6 +8,7 @@ import DashboardHome from './pages/DashboardHome';
 import PrivateRoute from './components/auth/PrivateRoute';
 import Sidebar from './components/layout/Sidebar';
 import API from './services/api';
+import JobWorkConfig from './pages/JobWorkConfig';
 
 function AuthHandler({ setIsAuthenticated }) {
   const navigate = useNavigate();
@@ -75,6 +76,7 @@ function App() {
                 <Box component="main" sx={{ flexGrow: 1, p: 4, transition: '0.3s' }}>
                   <Routes>
                     <Route path="/dashboard" element={<DashboardHome />} />
+                    <Route path="/job-rates" element={<JobWorkConfig />} />
                     <Route path="*" element={<Navigate to="/dashboard" />} />
                   </Routes>
                 </Box>

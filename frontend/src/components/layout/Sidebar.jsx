@@ -13,6 +13,7 @@ const Sidebar = () => {
   const menuItems = [
     { text: 'Dashboard', icon: <Dashboard />, path: '/dashboard' },
     { text: 'Traders', icon: <People />, path: '/traders' },
+    { text: 'Job Rates', icon: <Receipt />, path: '/job-rates' },
     { text: 'Invoices', icon: <Receipt />, path: '/invoices' },
   ];
 
