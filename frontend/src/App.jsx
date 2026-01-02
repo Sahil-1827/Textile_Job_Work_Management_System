@@ -1,4 +1,5 @@
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { Box } from '@mui/material';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 import DashboardHome from './pages/DashboardHome';
@@ -10,29 +11,27 @@ function App() {
 
   return (
     <Router>
-      <Routes>
-        <Route
-          path="/"
-          element={isAuthenticated ? <Navigate to="/dashboard" /> : <Navigate to="/login" />}
-        />
+      <Box sx={{ bgcolor: 'background.default', minHeight: '100vh', color: 'text.primary', transition: '0.3s' }}>
+        <Routes>
+          <Route path="/" element={isAuthenticated ? <Navigate to="/dashboard" /> : <Navigate to="/login" />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
 
-        <Route path="/login" element={<Login />} />
-        <Route path="/signup" element={<Signup />} />
-
-        <Route element={<PrivateRoute />}>
-          <Route path="/*" element={
-            <div className="flex">
-              <Sidebar />
-              <main className="flex-1 p-8 bg-gray-50 min-h-screen">
-                <Routes>
-                  <Route path="/dashboard" element={<DashboardHome />} />
-                  <Route path="*" element={<Navigate to="/dashboard" />} />
-                </Routes>
-              </main>
-            </div>
-          } />
-        </Route>
-      </Routes>
+          <Route element={<PrivateRoute />}>
+            <Route path="/*" element={
+              <Box sx={{ display: 'flex' }}>
+                <Sidebar />
+                <Box component="main" sx={{ flexGrow: 1, p: 4, transition: '0.3s' }}>
+                  <Routes>
+                    <Route path="/dashboard" element={<DashboardHome />} />
+                    <Route path="*" element={<Navigate to="/dashboard" />} />
+                  </Routes>
+                </Box>
+              </Box>
+            } />
+          </Route>
+        </Routes>
+      </Box>
     </Router>
   );
 }

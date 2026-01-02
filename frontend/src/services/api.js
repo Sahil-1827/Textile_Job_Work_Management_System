@@ -25,3 +25,4 @@ API.interceptors.response.use(
 
 export const loginAdmin = (formData) => API.post("/auth/login", formData);
 export const signupUser = (formData) => API.post("/auth/signup", formData);
+export const getDashboardStats = () => API.get("/dashboard/stats");

@@ -1,5 +1,14 @@
 import React, { useState } from 'react';
-import { TextField, Button, Paper, Typography, Box, CircularProgress, Alert } from '@mui/material';
+import {
+    TextField,
+    Button,
+    Paper,
+    Typography,
+    Box,
+    CircularProgress,
+    Alert,
+    useTheme
+} from '@mui/material';
 import { useNavigate, Link } from 'react-router-dom';
 import { loginAdmin } from '../services/api';
 
@@ -8,62 +17,127 @@ const Login = () => {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
     const navigate = useNavigate();
+    const theme = useTheme();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         setLoading(true);
+        setError('');
+
         try {
             const { data } = await loginAdmin(formData);
             localStorage.setItem('token', data.token);
             localStorage.setItem('user', JSON.stringify(data.user));
             navigate('/dashboard');
         } catch (error) {
-            setError(error.response?.data?.message || "Invalid Credentials");
+            setError(error.response?.data?.message || 'Invalid credentials');
         } finally {
             setLoading(false);
         }
     };
 
     return (
-        <Box className="flex h-screen items-center justify-center bg-gray-100">
-            <Paper elevation={6} className="p-8 w-full max-w-md rounded-lg">
-                <Typography variant="h4" className="text-center font-bold mb-2 text-blue-600">
+        <Box
+            sx={{
+                height: '100vh',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                background:
+                    theme.palette.mode === 'light'
+                        ? 'linear-gradient(135deg, #f3f4f6 0%, #e5e7eb 100%)'
+                        : 'linear-gradient(135deg, #111827 0%, #000000 100%)'
+            }}
+        >
+            <Paper
+                elevation={10}
+                sx={{
+                    p: 5,
+                    width: '100%',
+                    maxWidth: 400,
+                    borderRadius: 4,
+                    bgcolor: 'background.paper'
+                }}
+            >
+                <Typography
+                    variant="h4"
+                    align="center"
+                    sx={{ fontWeight: 800, mb: 1, color: 'primary.main' }}
+                >
                     Textile MS
                 </Typography>
-                <Typography variant="body1" className="text-center text-gray-600 mb-6">
-                    Admin Login
+
+                <Typography
+                    variant="body2"
+                    align="center"
+                    color="text.secondary"
+                    sx={{ mb: 4 }}
+                >
+                    Login to your account
                 </Typography>
 
-                {error && <Alert severity="error" className="mb-4">{error}</Alert>}
+                {error && (
+                    <Alert severity="error" sx={{ mb: 3 }}>
+                        {error}
+                    </Alert>
+                )}
 
-                <form onSubmit={handleSubmit} className="space-y-6">
+                <form
+                    onSubmit={handleSubmit}
+                    style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}
+                >
                     <TextField
                         fullWidth
                         label="Email Address"
-                        type="email"
+                        variant="outlined"
                         required
-                        onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                        onChange={(e) =>
+                            setFormData({ ...formData, email: e.target.value })
+                        }
                     />
+
                     <TextField
                         fullWidth
                         label="Password"
                         type="password"
+                        variant="outlined"
                         required
-                        onChange={(e) => setFormData({ ...formData, password: e.target.value })}
+                        onChange={(e) =>
+                            setFormData({ ...formData, password: e.target.value })
+                        }
                     />
-                    <Button type="submit" variant="contained" fullWidth disabled={loading}>
-                        {loading ? <CircularProgress size={24} /> : "Login"}
+
+                    <Button
+                        fullWidth
+                        variant="contained"
+                        type="submit"
+                        size="large"
+                        disabled={loading}
+                        sx={{ py: 1.5, fontWeight: 'bold', fontSize: '1rem' }}
+                    >
+                        {loading ? (
+                            <CircularProgress size={24} color="inherit" />
+                        ) : (
+                            'Login'
+                        )}
                     </Button>
                 </form>
-                <Button
-                    component={Link}
-                    to="/signup"
-                    variant="text"
-                    fullWidth
-                    className="mt-4"
-                >
-                    Don't have an account? Sign Up
-                </Button>
+
+                <Box sx={{ mt: 3, textAlign: 'center' }}>
+                    <Typography variant="body2" color="text.secondary">
+                        Don’t have an account?{' '}
+                        <Link
+                            to="/signup"
+                            style={{
+                                color: theme.palette.primary.main,
+                                fontWeight: 600,
+                                textDecoration: 'none'
+                            }}
+                        >
+                            Sign up
+                        </Link>
+                    </Typography>
+                </Box>
             </Paper>
         </Box>
     );

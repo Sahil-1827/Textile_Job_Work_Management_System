@@ -1,12 +1,23 @@
 @import "tailwindcss";
 
-body {
-  font-family: Arial, sans-serif;
-  background-color: #f9f9f9;
-  color: #333;
+:root {
+  --bg-light: #f9fafb;
+  --bg-dark: #111827;
+  --paper-light: #ffffff;
+  --paper-dark: #1f2937;
+  --text-light: #111827;
+  --text-dark: #f9fafb;
 }
 
-#root {
+body {
   margin: 0;
-  padding: 0;
+  font-family: 'Inter', sans-serif;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.auth-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
