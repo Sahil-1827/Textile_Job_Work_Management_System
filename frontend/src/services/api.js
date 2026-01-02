@@ -14,14 +14,11 @@ API.interceptors.request.use((req) => {
 API.interceptors.response.use(
   (response) => response,
   (error) => {
-    if (error.response && error.response.status === 401) {
-      localStorage.removeItem("token");
-      localStorage.removeItem("user");
-      Navigate('/');
-    }
     return Promise.reject(error);
   }
 );
+
+export default API;
 
 export const loginAdmin = (formData) => API.post("/auth/login", formData);
 export const signupUser = (formData) => API.post("/auth/signup", formData);
