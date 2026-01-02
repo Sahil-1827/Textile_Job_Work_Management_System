@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { TextField, Button, Paper, Typography, Box, MenuItem, Alert, CircularProgress, useTheme } from '@mui/material';
 import { useNavigate, Link } from 'react-router-dom';
 import { signupUser } from '../services/api';
+import { toast } from 'react-toastify';
 
 const Signup = () => {
     const [formData, setFormData] = useState({ username: '', email: '', password: '', role: 'user' });
@@ -16,10 +17,11 @@ const Signup = () => {
         setError('');
         try {
             await signupUser(formData);
-            alert("Signup successful! Have ma login karo.");
+            toast.success("Signup successful!");
             navigate('/login');
         } catch (err) {
             setError(err.response?.data?.message || "Signup failed");
+            toast.error(err.response?.data?.message || "Signup failed");
         } finally {
             setLoading(false);
         }

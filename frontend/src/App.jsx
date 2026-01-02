@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Routes, Route, Navigate, useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { Box } from '@mui/material';
+import { ToastContainer } from 'react-toastify';
 import LandingPage from './pages/LandingPage';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
@@ -9,6 +10,7 @@ import PrivateRoute from './components/auth/PrivateRoute';
 import Sidebar from './components/layout/Sidebar';
 import API from './services/api';
 import JobWorkConfig from './pages/JobWorkConfig';
+import 'react-toastify/dist/ReactToastify.css';
 
 function AuthHandler({ setIsAuthenticated }) {
   const navigate = useNavigate();
@@ -55,6 +57,8 @@ function App() {
   return (
     <Router>
       <AuthHandler setIsAuthenticated={setIsAuthenticated} />
+
+      <ToastContainer position="top-center" autoClose={3000} />
 
       <Box sx={{ bgcolor: 'background.default', minHeight: '100vh', transition: '0.3s' }}>
         <Routes>

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Grid, Typography, Box, Card, CardContent, Avatar, useTheme, Skeleton } from '@mui/material';
 import { People, Receipt, PendingActions, EventNote } from '@mui/icons-material';
 import { getDashboardStats } from '../services/api'; // Using your API function
+import { toast } from 'react-toastify';
 
 const StatCard = ({ title, value, icon, color, loading }) => {
   const theme = useTheme();
@@ -11,7 +12,7 @@ const StatCard = ({ title, value, icon, color, loading }) => {
       background: theme.palette.mode === 'dark' ? '#1f2937' : '#ffffff', // Gray-800 for dark mode
       transition: '0.3s',
       border: `1px solid ${theme.palette.divider}`,
-      '&:hover': { transform: 'translateY(-5px)', boxShadow: '0 10px 15px -3px rgb(0 0 0 / 0.1)' }
+      '&:hover': { boxShadow: '0 10px 15px -3px rgb(0 0 0 / 0.1)' }
     }}>
       <CardContent sx={{ display: 'flex', alignItems: 'center', p: 3 }}>
         <Avatar sx={{ bgcolor: `${color}20`, color: color, width: 52, height: 52, mr: 2 }}>{icon}</Avatar>
@@ -43,7 +44,7 @@ const DashboardHome = () => {
         const { data } = await getDashboardStats(); // Fetch data from the API
         setStats(data);
       } catch (err) {
-        console.error("Stats fetch failed:", err);
+        toast.error("Stats fetch failed:", err);
       } finally {
         setLoading(false);
       }

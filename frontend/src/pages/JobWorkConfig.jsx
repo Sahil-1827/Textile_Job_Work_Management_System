@@ -5,6 +5,7 @@ import {
 } from '@mui/material';
 import { Edit, Save, Cancel } from '@mui/icons-material';
 import { getJobWorkTypes, addJobWorkType, updateJobWorkType } from '../services/api';
+import { toast } from 'react-toastify';
 
 const JobWorkConfig = () => {
     const [types, setTypes] = useState([]);
@@ -24,14 +25,15 @@ const JobWorkConfig = () => {
             const res = await getJobWorkTypes();
             setTypes(res.data);
         } catch (err) {
-            console.error("Failed to fetch types", err);
+            toast.error("Failed to fetch job work types", err);
         }
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        if (!isAdmin) return alert("Only admins can add processes");
+        if (!isAdmin) return toast.error("Only admins can add processes");
         await addJobWorkType(formData);
+        toast.success("Process added successfully!");
         setFormData({ processName: '', rate: '', unit: 'meter' });
         fetchTypes();
     };
@@ -45,9 +47,10 @@ const JobWorkConfig = () => {
         try {
             await updateJobWorkType(editingId, editData);
             setEditingId(null);
+            toast.success("Update successful!");
             fetchTypes();
         } catch (err) {
-            alert("Update failed");
+            toast.error("Update failed");
         }
     };
 

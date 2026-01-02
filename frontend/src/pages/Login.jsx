@@ -11,6 +11,7 @@ import {
 } from '@mui/material';
 import { useNavigate, Link } from 'react-router-dom';
 import { loginAdmin } from '../services/api';
+import { toast } from 'react-toastify';
 
 const Login = () => {
     const [formData, setFormData] = useState({ email: '', password: '' });
@@ -26,11 +27,14 @@ const Login = () => {
 
         try {
             const { data } = await loginAdmin(formData);
+            console.log(data, 'Login.jsx line 29')
             localStorage.setItem('token', data.token);
             localStorage.setItem('user', JSON.stringify(data.user));
+            toast.success("Login Successful!");
             navigate('/dashboard');
         } catch (error) {
             setError(error.response?.data?.message || 'Invalid credentials');
+            toast.error(error.response?.data?.message || 'Invalid credentials');
         } finally {
             setLoading(false);
         }

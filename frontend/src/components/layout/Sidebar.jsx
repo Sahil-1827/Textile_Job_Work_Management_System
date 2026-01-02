@@ -3,6 +3,7 @@ import { Box, Typography, IconButton, List, ListItem, ListItemButton, ListItemIc
 import { Dashboard, People, Receipt, Brightness4, Brightness7, Logout } from '@mui/icons-material';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useColorMode } from '../../theme/ThemeContext';
+import { toast } from 'react-toastify';
 
 const Sidebar = () => {
   const theme = useTheme();
@@ -18,6 +19,7 @@ const Sidebar = () => {
   ];
 
   const handleLogout = () => {
+    toast.info("Logged out successfully");
     localStorage.removeItem('token');
     localStorage.removeItem('user');
     navigate('/');
