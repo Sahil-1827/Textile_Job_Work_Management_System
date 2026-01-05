@@ -29,3 +29,4 @@ export const updateJobWorkType = (id, data) => API.put(`/job-work/types/${id}`, 
 export const getJobWorkEntries = () => API.get("/job-work/entries");
 export const addJobWorkEntry = (data) => API.post("/job-work/entries", data);
 export const updateEntryStatus = (id, status) => API.patch(`/job-work/entries/${id}/status`, { status });
+export const getPendingJobWorkEntries = (filters) => API.get("/job-work/entries/pending", { params: filters });

@@ -17,6 +17,7 @@ const Sidebar = () => {
     { text: 'Job Rates', icon: <Receipt />, path: '/job-rates' },
     { text: 'Invoices', icon: <Receipt />, path: '/invoices' },
     { text: 'Job Work Entry', icon: <Receipt />, path: '/job-work-entry' },
+    { text: 'Pending Jobs', icon: <Receipt />, path: '/pending-jobs' },
   ];
 
   const handleLogout = () => {
